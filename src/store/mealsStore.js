@@ -6,17 +6,19 @@ export const useMealStore = defineStore("MealStore", () => {
   const mealsByLetter = ref([]);
   const mealsByIngredient = ref([]);
   const ingredient = ref({});
+
   const searchMeals = (keyword) => {
-      searchedMeals.value = []
-      axiosClient.get(`search.php?s=${keyword}`).then(({ data }) => {
-        Array.prototype.push.apply(searchedMeals.value, data.meals);
-      });
+    searchedMeals.value = [];
+    axiosClient.get(`search.php?s=${keyword}`).then(({ data }) => {
+      Array.prototype.push.apply(searchedMeals.value, data.meals);
+    });
   };
-  // const searchMealsByLetter = ({ commit }, letter) => {
-  //   axiosClient.get(`search.php?f=${letter}`).then(({ data }) => {
-  //     commit("setMealsByLetter", data.meals);
-  //   });
-  // };
+  const searchMealsByLetter = (letter) => {
+    mealsByLetter.value = [];
+    axiosClient.get(`search.php?f=${letter}`).then(({ data }) => {
+      Array.prototype.push.apply(mealsByLetter.value, data.meals);
+    });
+  };
 
   // const searchMealsByIngredient = ({ commit }, ing) => {
   //   axiosClient.get(`filter.php?i=${ing}`).then(({ data }) => {
@@ -26,9 +28,7 @@ export const useMealStore = defineStore("MealStore", () => {
   const setSearchedMeals = computed((meals) => {
     searchedMeals.value = meals || [];
   });
-  // const setMealsByLetter = setMealsByLetter((meals) => {
-  //   mealsByLetter.value = meals || [];
-  // });
+
   // const setMealsByIngredients = computed((meals) => {
   //   setMealsByIngredients.value = meals || [];
   // });
@@ -37,7 +37,7 @@ export const useMealStore = defineStore("MealStore", () => {
   // });
   return {
     // searchMealsByIngredient,
-    // searchMealsByLetter,
+    searchMealsByLetter,
     // setIngredient,
     // setMealsByIngredients,
     // setMealsByLetter,
