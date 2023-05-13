@@ -11,17 +11,17 @@
       <div class="flex gap-4 items-center h-full">
         <router-link
           class="h-full inline-flex items-center px-5 transition-colors hover:bg-purple-100"
-          :to="{name: 'byName'}"
+          :to="{ name: 'byName' }"
           >Serch Meals</router-link
         >
         <router-link
           class="h-full inline-flex items-center px-5 transition-colors hover:bg-purple-100"
-          :to="{name: 'byLetter'}"
+          :to="{ name: 'byLetter' }"
           >Meals By Letter</router-link
         >
         <router-link
           class="h-full inline-flex items-center px-5 transition-colors hover:bg-purple-100"
-          :to="{name: 'byIngredient'}"
+          :to="{ name: 'byIngredient' }"
           >Meels By Ingredient</router-link
         >
       </div>
