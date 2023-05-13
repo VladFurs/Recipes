@@ -1,7 +1,51 @@
 import { defineStore } from "pinia";
 import { ref, computed, watch } from "vue";
+import axiosClient from "../axiosClient";
 export const useMealStore = defineStore("MealStore", () => {
-  
+  const searchedMeals = ref([]);
+  const mealsByLetter = ref([]);
+  const mealsByIngredient = ref([]);
+  const ingredient = ref({});
+  const searchMeals = (keyword) => {
+      searchedMeals.value = []
+      axiosClient.get(`search.php?s=${keyword}`).then(({ data }) => {
+        Array.prototype.push.apply(searchedMeals.value, data.meals);
+      });
+  };
+  // const searchMealsByLetter = ({ commit }, letter) => {
+  //   axiosClient.get(`search.php?f=${letter}`).then(({ data }) => {
+  //     commit("setMealsByLetter", data.meals);
+  //   });
+  // };
 
-return{}
-})
+  // const searchMealsByIngredient = ({ commit }, ing) => {
+  //   axiosClient.get(`filter.php?i=${ing}`).then(({ data }) => {
+  //     commit("setMealsByIngredients", data.meals);
+  //   });
+  // };
+  const setSearchedMeals = computed((meals) => {
+    searchedMeals.value = meals || [];
+  });
+  // const setMealsByLetter = setMealsByLetter((meals) => {
+  //   mealsByLetter.value = meals || [];
+  // });
+  // const setMealsByIngredients = computed((meals) => {
+  //   setMealsByIngredients.value = meals || [];
+  // });
+  // const setIngredient = computed((meals) => {
+  //   setIngredient.value = meals || [];
+  // });
+  return {
+    // searchMealsByIngredient,
+    // searchMealsByLetter,
+    // setIngredient,
+    // setMealsByIngredients,
+    // setMealsByLetter,
+    searchedMeals,
+    mealsByLetter,
+    mealsByIngredient,
+    ingredient,
+    searchMeals,
+    setSearchedMeals,
+  };
+});
