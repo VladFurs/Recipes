@@ -56,10 +56,11 @@
 </template>
 
 <script setup>
+  import { useRoute } from "vue-router";
   import { onMounted, ref } from "vue";
   import axiosClient from "../axiosClient";
   import YouTubeButton from "../components/YouTubeButton.vue";
-
+  const route = useRoute();
   const meal = ref({});
 
   onMounted(() => {
