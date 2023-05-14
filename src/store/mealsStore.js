@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, computed, watch } from "vue";
+import { ref, computed} from "vue";
 import axiosClient from "../axiosClient";
 export const useMealStore = defineStore("MealStore", () => {
   const searchedMeals = ref([]);
@@ -20,27 +20,30 @@ export const useMealStore = defineStore("MealStore", () => {
     });
   };
 
-  // const searchMealsByIngredient = ({ commit }, ing) => {
-  //   axiosClient.get(`filter.php?i=${ing}`).then(({ data }) => {
-  //     commit("setMealsByIngredients", data.meals);
-  //   });
-  // };
+  const searchMealsByIngredient = (ing) => {
+    axiosClient.get(`filter.php?i=${ing}`).then(({ data }) => {
+      mealsByIngredient.value = data.meals;
+    });
+  };
   const setSearchedMeals = computed((meals) => {
     searchedMeals.value = meals || [];
   });
 
-  // const setMealsByIngredients = computed((meals) => {
-  //   setMealsByIngredients.value = meals || [];
-  // });
-  // const setIngredient = computed((meals) => {
-  //   setIngredient.value = meals || [];
-  // });
+  const setIngredient = computed((meals) => {
+    setIngredient.value = meals || [];
+  });
+  const setMealsByLetter=(meals) => {
+    mealsByLetter.value = meals || []
+  }
+  const setMealsByIngredients=(meals) => {
+    mealsByIngredient.value = meals || []
+  }
   return {
-    // searchMealsByIngredient,
+    searchMealsByIngredient,
     searchMealsByLetter,
-    // setIngredient,
-    // setMealsByIngredients,
-    // setMealsByLetter,
+    setIngredient,
+    setMealsByIngredients,
+    setMealsByLetter,
     searchedMeals,
     mealsByLetter,
     mealsByIngredient,
