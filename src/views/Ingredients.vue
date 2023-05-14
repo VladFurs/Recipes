@@ -39,8 +39,8 @@
     );
   });
 
-const openIngredient = (ingredient) => {
-  MealStore.searchMealsByIngredient(ingredient);
+  const openIngredient = (ingredient) => {
+    MealStore.searchMealsByIngredient(ingredient);
     router.push({
       name: "byIngredient",
       params: { ingredient: ingredient },

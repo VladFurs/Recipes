@@ -10,12 +10,12 @@
   import Meals from "../components/Meals.vue";
   import axiosClient from "../axiosClient.js";
 
-const meals = ref([]);
+  const meals = ref([]);
   onMounted(async () => {
     for (let i = 0; i < 10; i++) {
-    axiosClient
-      .get(`random.php`)
-      .then(({ data }) => meals.value.push(data.meals[0]));
+      axiosClient
+        .get(`random.php`)
+        .then(({ data }) => meals.value.push(data.meals[0]));
     }
   });
 
